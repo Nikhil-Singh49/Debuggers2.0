@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Attendance & Fee Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" class="icon">
+            <path d="M3 11.5 12 3l9 8.5v8.5a2 2 0 0 1-2 2h-4v-5H9v5H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-kicker">EduPulse</span>
+          <span class="brand-name">School ERP</span>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar-wrap">
+          <span class="avatar">AR</span>
+          <span class="status-dot"></span>
+        </div>
+        <div class="profile-detail">
+          <span class="profile-role">Admin Portal</span>
+          <span class="profile-name">Aarav Reddy</span>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <div class="nav-label">Main</div>
+        <a class="nav-link active" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M3 13h8l4-8 3 14 2-6h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 19h16M5 15l4-4 4 4 6-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Attendance</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 6h16v5H4zM4 13h16v5H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Students</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 19V9l8-5 8 5v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 19h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span>Teachers</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M3 7h18v10H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 18h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span>Fees & Accounts</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 19L12 4l8 15H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9h.01M10 13h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span>Announcements</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <span>Timetable</span>
+        </a>
+      </nav>
+
+      <nav class="main-nav secondary-nav">
+        <div class="nav-label">System</div>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 20h16M5 16l4-4 4 4 6-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Analytics</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 8h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4h8v4H8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <span>Notifications</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M12 3a9 9 0 1 0 9 9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01M12 12l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span>Sync Status</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sync-card">
+          <div class="sync-row">
+            <span class="sync-label">Offline Sync</span>
+            <span class="sync-state online">Active</span>
+          </div>
+          <div class="sync-bar">
+            <span class="sync-bar-fill" style="width:88%;"></span>
+          </div>
+          <div class="sync-meta">Last sync: 09:34 AM</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div>
+            <div class="breadcrumb">Home / Dashboard</div>
+            <h1>Smart School Overview</h1>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" class="icon search-icon"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m21 21-4.2-4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="Search students, teachers..." />
+          </div>
+          <button class="icon-button">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7.5 0 10h12c3-2.5 0-3 0-10z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 21h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="primary-button">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add Student
+          </button>
+        </div>
+      </section>
+
+      <section class="summary-strip">
+        <article class="summary-card summary-blue">
+          <div class="summary-card-head">
+            <span class="summary-label">Total Students</span>
+            <span class="summary-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 20a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 11a4 4 0 0 0 0-8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+          </div>
+          <div class="summary-number">1,248</div>
+          <div class="summary-row">
+            <span class="trend up">+12.8%</span>
+            <span class="summary-text">vs last month</span>
+          </div>
+        </article>
+
+        <article class="summary-card summary-green">
+          <div class="summary-card-head">
+            <span class="summary-label">Present Today</span>
+            <span class="summary-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M5 12l4 4L19 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+          <div class="summary-number">982</div>
+          <div class="summary-row">
+            <span class="trend up">+86</span>
+            <span class="summary-text">attendance marked</span>
+          </div>
+        </article>
+
+        <article class="summary-card summary-orange">
+          <div class="summary-card-head">
+            <span class="summary-label">Monthly Fees</span>
+            <span class="summary-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 17v4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+          </div>
+          <div class="summary-number">₹8.9L</div>
+          <div class="summary-row">
+            <span class="trend up">₹2.1L</span>
+            <span class="summary-text">collected today</span>
+          </div>
+        </article>
+
+        <article class="summary-card summary-red">
+          <div class="summary-card-head">
+            <span class="summary-label">Low Attendance</span>
+            <span class="summary-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M12 3a9 9 0 1 0 9 9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01M12 12l4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+          </div>
+          <div class="summary-number">37</div>
+          <div class="summary-row">
+            <span class="trend down">-05</span>
+            <span class="summary-text">students flagged</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel panel-wide">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">Attendance Overview</span>
+              <h2>Monthly Attendance Trend</h2>
+            </div>
+            <div class="panel-actions">
+              <button class="chip active">2026</button>
+              <button class="chip">Class Avg</button>
+              <button class="chip">75% Target</button>
+            </div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-grid">
+              <div class="chart-labels">
+                <span class="chart-label">100%</span>
+                <span class="chart-label">80%</span>
+                <span class="chart-label">60%</span>
+                <span class="chart-label">40%</span>
+                <span class="chart-label">20%</span>
+              </div>
+              <div class="line-chart">
+                <svg viewBox="0 0 620 250" class="line-svg">
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#3b82f6" stop-opacity="0.95" />
+                      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.2" />
+                    </linearGradient>
+                  </defs>
+                  <g class="grid-lines">
+                    <path d="M 0 210 H 620" />
+                    <path d="M 0 170 H 620" />
+                    <path d="M 0 130 H 620" />
+                    <path d="M 0 90 H 620" />
+                    <path d="M 0 50 H 620" />
+                  </g>
+                  <path class="line-shadow" d="M0 150 C40 150,40 128,80 130 C120 130,120 100,160 112 C200 115,205 85,240 90 C280 90,285 70,320 75 C360 80,360 68,400 78 C440 85,440 70,480 65 C520 65,530 70,560 72 C580 72,590 60,620 62" />
+                  <path class="line-main" d="M0 150 C40 150,40 128,80 130 C120 130,120 100,160 112 C200 115,205 85,240 90 C280 90,285 70,320 75 C360 80,360 68,400 78 C440 85,440 70,480 65 C520 65,530 70,560 72 C580 72,590 60,620 62" />
+                  <path class="line-target" d="M0 116 C100 116 135 112 170 116 C230 120 250 106 280 116 C320 118 360 114 410 118 C450 120 500 116 540 110 C580 110 610 110 620 110" />
+                  <circle class="point point1" cx="80" cy="130" r="4" />
+                  <circle class="point point2" cx="240" cy="90" r="4" />
+                  <circle class="point point3" cx="400" cy="78" r="4" />
+                  <circle class="point point4" cx="620" cy="62" r="4" />
+                </svg>
+              </div>
+            </div>
+            <div class="chart-months">
+              <span>Jan</span>
+              <span>Feb</span>
+              <span>Mar</span>
+              <span>Apr</span>
+              <span>May</span>
+              <span>Jun</span>
+              <span>Jul</span>
+              <span>Aug</span>
+              <span>Sep</span>
+              <span>Oct</span>
+              <span>Nov</span>
+              <span>Dec</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel panel-small">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Calendar</span>
+              <h2>Attendance Colors</h2>
+            </div>
+            <button class="icon-button small-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M3 9h18M8 3v6M16 3v6M4 21h16V4H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="calendar-card">
+            <div class="calendar-month">September 2026</div>
+            <div class="calendar-grid">
+              <span class="day-name">Sun</span>
+              <span class="day-name">Mon</span>
+              <span class="day-name">Tue</span>
+              <span class="day-name">Wed</span>
+              <span class="day-name">Thu</span>
+              <span class="day-name">Fri</span>
+              <span class="day-name">Sat</span>
+
+              <span class="empty-day">30</span>
+              <span class="empty-day">31</span>
+              <span class="day present">1</span>
+              <span class="day late">2</span>
+              <span class="day present">3</span>
+              <span class="day absent">4</span>
+              <span class="day present">5</span>
+
+              <span class="day present">6</span>
+              <span class="day holiday">7</span>
+              <span class="day present">8</span>
+              <span class="day present">9</span>
+              <span class="day late">10</span>
+              <span class="day present">11</span>
+              <span class="day absent">12</span>
+
+              <span class="day holiday">13</span>
+              <span class="day present">14</span>
+              <span class="day present">15</span>
+              <span class="day absent">16</span>
+              <span class="day present">17</span>
+              <span class="day present">18</span>
+              <span class="day date-today">19</span>
+            </div>
+          </div>
+
+          <div class="legend-list">
+            <div class="legend-row"><span class="legend-swatch present-swatch"></span><span>Present</span><span class="legend-code">Green</span></div>
+            <div class="legend-row"><span class="legend-swatch absent-swatch"></span><span>Absent</span><span class="legend-code">Red</span></div>
+            <div class="legend-row"><span class="legend-swatch holiday-swatch"></span><span>Holiday</span><span class="legend-code">Yellow</span></div>
+            <div class="legend-row"><span class="legend-swatch late-swatch"></span><span>Late</span><span class="legend-code">Orange</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Today’s Class Flow</span>
+              <h2>Class Attendance</h2>
+            </div>
+            <button class="icon-button small-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="class-list">
+            <div class="class-row">
+              <div class="class-row-left">
+                <span class="class-code class-one">VI-A</span>
+                <span class="class-info">
+                  <span class="class-name">Class VI A</span>
+                  <span class="class-meta">Maths • Biology • Science</span>
+                </span>
+              </div>
+              <div class="class-status">
+                <span class="status-badge present-bg">96%</span>
+              </div>
+            </div>
+            <div class="class-row">
+              <div class="class-row-left">
+                <span class="class-code class-two">VII-B</span>
+                <span class="class-info">
+                  <span class="class-name">Class VII B</span>
+                  <span class="class-meta">English • History • ICT</span>
+                </span>
+              </div>
+              <div class="class-status">
+                <span class="status-badge late-bg">82%</span>
+              </div>
+            </div>
+            <div class="class-row">
+              <div class="class-row-left">
+                <span class="class-code class-three">VIII-C</span>
+                <span class="class-info">
+                  <span class="class-name">Class VIII C</span>
+                  <span class="class-meta">Physics • Chemistry • Maths</span>
+                </span>
+              </div>
+              <div class="class-status">
+                <span class="status-badge absent-bg">68%</span>
+              </div>
+            </div>
+            <div class="class-row">
+              <div class="class-row-left">
+                <span class="class-code class-four">IX-A</span>
+                <span class="class-info">
+                  <span class="class-name">Class IX A</span>
+                  <span class="class-meta">Computer Science • Biology</span>
+                </span>
+              </div>
+              <div class="class-status">
+                <span class="status-badge present-bg">91%</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Fee Collection</span>
+              <h2>Accounts Status</h2>
+            </div>
+            <span class="panel-date">Sep 2026</span>
+          </div>
+          <div class="fee-meter">
+            <div class="fee-overview">
+              <div class="fee-total">₹8,90,240</div>
+              <div class="fee-sub">Collected this month</div>
+            </div>
+            <div class="meter-wrap">
+              <div class="meter-track">
+                <span class="meter-bar" style="width:76%;"></span>
+              </div>
+              <div class="meter-meta">
+                <span class="meter-label">Collection Rate</span>
+                <span class="meter-percent">76%</span>
+              </div>
+            </div>
+          </div>
+          <div class="fee-stats">
+            <div>
+              <span class="fee-stat-label">Paid</span>
+              <span class="fee-stat-value paid">842</span>
+            </div>
+            <div>
+              <span class="fee-stat-label">Pending</span>
+              <span class="fee-stat-value pending">176</span>
+            </div>
+            <div>
+              <span class="fee-stat-label">Due Amount</span>
+              <span class="fee-stat-value due">₹2,12,480</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Communication</span>
+              <h2>Notifications</h2>
+            </div>
+            <button class="icon-button small-icon">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-row">
+              <span class="notification-icon green-icon">!</span>
+              <div>
+                <span class="notification-title">Exam schedule updated</span>
+                <span class="notification-meta">Class IX • Science</span>
+              </div>
+              <span class="notification-time">08 min</span>
+            </div>
+            <div class="notification-row">
+              <span class="notification-icon orange-icon">!</span>
+              <div>
+                <span class="notification-title">Fee reminder generated</span>
+                <span class="notification-meta">Accounts • Due list</span>
+              </div>
+              <span class="notification-time">2 hrs</span>
+            </div>
+            <div class="notification-row">
+              <span class="notification-icon blue-icon">!</span>
+              <div>
+                <span class="notification-title">Low attendance warning</span>
+                <span class="notification-meta">37 students flagged</span>
+              </div>
+              <span class="notification-time">Today</span>
+            </div>
+            <div class="notification-row">
+              <span class="notification-icon red-icon">!</span>
+              <div>
+                <span class="notification-title">Parent SMS alert sent</span>
+                <span class="notification-meta">Absent students</span>
+              </div>
+              <span class="notification-time">17 min</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Teaching & Reporting</span>
+              <h2>Teacher Reports</h2>
+            </div>
+            <button class="chip active">This Month</button>
+          </div>
+          <div class="teacher-list">
+            <div class="teacher-row">
+              <span class="teacher-avatar">SM</span>
+              <div class="teacher-info">
+                <span class="teacher-name">Shreya Malhotra</span>
+                <span class="teacher-role">Mathematics • Class VI-VIII</span>
+              </div>
+              <span class="teacher-attendance">96%</span>
+            </div>
+            <div class="teacher-row">
+              <span class="teacher-avatar alt">RK</span>
+              <div class="teacher-info">
+                <span class="teacher-name">Rohit Kapoor</span>
+                <span class="teacher-role">Science • Class IX-X</span>
+              </div>
+              <span class="teacher-attendance">91%</span>
+            </div>
+            <div class="teacher-row">
+              <span class="teacher-avatar alt2">AN</span>
+              <div class="teacher-info">
+                <span class="teacher-name">Ananya Nair</span>
+                <span class="teacher-role">English • Senior Wing</span>
+              </div>
+              <span class="teacher-attendance">88%</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Prediction Engine</span>
+              <h2>Attendance Forecast</h2>
+            </div>
+            <span class="panel-date">12 Sep</span>
+          </div>
+          <div class="predict-cards">
+            <div class="predict-card">
+              <span class="predict-title">Today’s Impact</span>
+              <span class="predict-number">+1.2%</span>
+              <span class="predict-detail">Present</span>
+            </div>
+            <div class="predict-card">
+              <span class="predict-title">Required To Reach 75%</span>
+              <span class="predict-number">06</span>
+              <span class="predict-detail">Days more</span>
+            </div>
+            <div class="predict-card">
+              <span class="predict-title">Current Attendance</span>
+              <span class="predict-number">76%</span>
+              <span class="predict-detail">Target achieved</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-tables">
+        <article class="panel table-panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="panel-kicker">Student Insight</span>
+              <h2>Student Feedback & Performance</h2>
+            </div>
+            <button class="primary-button small-button">
+              <svg viewBox="0 0 24 24" class="icon"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Review All
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table class="student-table">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Class</th>
+                  <th>Attendance</th>
+                  <th>Fee Status</th>
+                  <th>Feedback</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="student-name">Aditi Sharma</span></td>
+                  <td>VI-A</td>
+                  <td><span class="progress-value high">94%</span></td>
+                  <td><span class="fee-status paid-status">Paid</span></td>
+                  <td><span class="feedback positive">Excellent</span></td>
+                  <td><button class="table-button">View</button></td>
+                </tr>
+                <tr>
+                  <td><span class="student-name">Kabir Verma</span></td>
+                  <td>VIII-C</td>
+                  <td><span class="progress-value mid">78%</span></td>
+                  <td><span class="fee-status pending-status">Pending</span></td>
+                  <td><span class="feedback average">Improving</span></td>
+                  <td><button class="table-button">View</button></td>
+                </tr>
+                <tr>
+                  <td><span class="student-name">Meera Iyer</span></td>
+                  <td>IX-A</td>
+                  <td><span class="progress-value low">62%</span></td>
+                  <td><span class="fee-status due-status">Due</span></td>
+                  <td><span class="feedback warning">Concern</span></td>
+                  <td><button class="table-button">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

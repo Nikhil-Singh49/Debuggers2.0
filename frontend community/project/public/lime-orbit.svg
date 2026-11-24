@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 280 -280 0 332 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#84CC16" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#84CC16" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="152" x2="526" y1="170" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A3E635" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#65A30D" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <circle cx="332" cy="300" r="280" fill="url(#glow)"/>
+  <path d="M112 430c8-166 120-286 330-300-6 202-107 319-330 300Z" fill="url(#leaf)"/>
+  <path d="M112 430c112-106 218-191 330-300M200 351c43 3 82 15 117 37m-54-99c41 1 77 9 110 25m-46-91c31 0 58 4 84 13" stroke="#65A30D" stroke-linecap="round" stroke-width="8" stroke-opacity=".22"/>
+  <circle cx="420" cy="196" r="5" fill="#65A30D" fill-opacity=".36"/>
+  <circle cx="468" cy="252" r="3" fill="#84CC16" fill-opacity=".5"/>
+  <circle cx="173" cy="484" r="4" fill="#84CC16" fill-opacity=".4"/>
+</svg>

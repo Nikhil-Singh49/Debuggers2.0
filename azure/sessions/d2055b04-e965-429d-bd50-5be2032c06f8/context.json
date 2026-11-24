@@ -1,0 +1,157 @@
+{
+  "sessionId": "d2055b04-e965-429d-bd50-5be2032c06f8",
+  "createdUtc": "2026-11-19T16:40:00.000Z",
+  "lastModifiedUtc": "2026-11-19T16:50:00.000Z",
+  "currentPhase": null,
+  "completedPhases": [
+    "prereq"
+  ],
+  "statusSummary": "Readiness is blocked by an incomplete root Node.js package; frontend and API are deployable with configuration caveats.",
+  "intent": {
+    "userPrompt": "is it ready to deploy?",
+    "description": "Evaluate the EduPulse frontend and Node.js API for deployment readiness."
+  },
+  "components": [
+    {
+      "name": "Root Node.js package",
+      "path": ".",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "Node.js / Express / Prisma",
+        "version": "Express 5.3.0; Prisma client 7.10.1; Prisma CLI 8.0.0-rc.34"
+      },
+      "readiness": {
+        "status": "needsFixes",
+        "fixes": [
+          "Confirm whether the root package is obsolete; if it is intended to deploy, add a valid entry point and start command and resolve the Prisma version mismatch."
+        ]
+      },
+      "verdicts": {
+        "build": "WARN",
+        "completeness": "FAIL",
+        "deployability": "FAIL"
+      },
+      "findings": [
+        {
+          "category": "build",
+          "verdict": "WARN",
+          "summary": "The root test script is hard-coded to exit with an error and there is no build script.",
+          "fix": "Remove the stale manifest or define real build and test commands."
+        },
+        {
+          "category": "completeness",
+          "verdict": "FAIL",
+          "summary": "The manifest points to a missing index.js and has no start script.",
+          "fix": "Remove the unused root package or add a valid application entry point and start script."
+        },
+        {
+          "category": "deployability",
+          "verdict": "FAIL",
+          "summary": "The root package cannot be launched as an app; it also declares Prisma client 7.x and Prisma CLI 8.0.0-rc without a Prisma schema.",
+          "fix": "Deploy the actual subprojects explicitly or complete and validate the root application."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": true,
+        "hasDockerfile": false,
+        "f1Viable": false,
+        "f1BlockReason": "native bcrypt addon in the root package lockfile"
+      }
+    },
+    {
+      "name": "EduPulse API",
+      "path": "community project",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "Node.js / Express",
+        "version": "Node >=20; Express 5.3.0"
+      },
+      "readiness": {
+        "status": "ready",
+        "fixes": []
+      },
+      "verdicts": {
+        "build": "PASS",
+        "completeness": "PASS",
+        "deployability": "WARN"
+      },
+      "findings": [
+        {
+          "category": "deployability",
+          "verdict": "WARN",
+          "summary": "The API requires a reachable SQL Server database with the existing dbo schema.",
+          "fix": "Provision Azure SQL and its required schema, then set the DB_* and JWT_SECRET application settings."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": false,
+        "hasDockerfile": false,
+        "f1Viable": true
+      }
+    },
+    {
+      "name": "EduPulse frontend",
+      "path": "frontend community/project",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "React / Vite",
+        "version": "React 19.1.0; Vite 6.3.2"
+      },
+      "readiness": {
+        "status": "ready",
+        "fixes": []
+      },
+      "verdicts": {
+        "build": "WARN",
+        "completeness": "WARN",
+        "deployability": "WARN"
+      },
+      "findings": [
+        {
+          "category": "build",
+          "verdict": "WARN",
+          "summary": "The most recent production build succeeded but emitted a 1.02 MB minified JavaScript chunk warning.",
+          "fix": "Consider route-level code splitting and reducing initial bundle size."
+        },
+        {
+          "category": "completeness",
+          "verdict": "WARN",
+          "summary": "The frontend README still describes the old mock API and password login.",
+          "fix": "Update the README to document the live API and actual configuration."
+        },
+        {
+          "category": "deployability",
+          "verdict": "WARN",
+          "summary": "The production API URL is not set by the source; the '/api' fallback needs same-origin routing.",
+          "fix": "Set VITE_API_URL to the deployed API origin or configure a production /api reverse proxy."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": false,
+        "hasDockerfile": false,
+        "f1Viable": true
+      }
+    }
+  ],
+  "azure": {
+    "subscriptionId": "",
+    "subscriptionName": "",
+    "resourceGroup": "",
+    "region": ""
+  },
+  "repo": {
+    "remote": null,
+    "lastScanCommit": null
+  },
+  "app": {
+    "name": "EduPulse"
+  },
+  "detectedInfra": [],
+  "detectedServices": [
+    {
+      "type": "sqlserver",
+      "source": "code"
+    }
+  ],
+  "overrides": []
+}

@@ -1,0 +1,233 @@
+{
+  "components": [
+    {
+      "name": "Root Node.js package",
+      "path": ".",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "Node.js / Express / Prisma",
+        "version": "Express 5.3.0; Prisma client 7.10.1; Prisma CLI 8.0.0-rc.34"
+      },
+      "readiness": {
+        "status": "needsFixes",
+        "fixes": [
+          "Confirm whether the root package is obsolete; if it is intended to deploy, add a valid entry point and start command and resolve the Prisma version mismatch."
+        ]
+      },
+      "verdicts": {
+        "build": "WARN",
+        "completeness": "FAIL",
+        "deployability": "FAIL"
+      },
+      "findings": [
+        {
+          "category": "build",
+          "verdict": "WARN",
+          "summary": "The root test script is hard-coded to exit with an error and there is no build script.",
+          "fix": "Remove the stale manifest or define real build and test commands."
+        },
+        {
+          "category": "completeness",
+          "verdict": "FAIL",
+          "summary": "The manifest points to a missing index.js and has no start script.",
+          "fix": "Remove the unused root package or add a valid application entry point and start script."
+        },
+        {
+          "category": "deployability",
+          "verdict": "FAIL",
+          "summary": "The root package cannot be launched as an app; it also declares Prisma client 7.x and Prisma CLI 8.0.0-rc without a Prisma schema.",
+          "fix": "Deploy the actual subprojects explicitly or complete and validate the root application."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": true,
+        "hasDockerfile": false,
+        "f1Viable": false,
+        "f1BlockReason": "native bcrypt addon in the root package lockfile"
+      }
+    },
+    {
+      "name": "EduPulse API",
+      "path": "community project",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "Node.js / Express",
+        "version": "Node >=20; Express 5.3.0"
+      },
+      "readiness": {
+        "status": "ready",
+        "fixes": []
+      },
+      "verdicts": {
+        "build": "PASS",
+        "completeness": "PASS",
+        "deployability": "WARN"
+      },
+      "findings": [
+        {
+          "category": "deployability",
+          "verdict": "WARN",
+          "summary": "The API requires a reachable SQL Server database with the existing dbo schema.",
+          "fix": "Provision Azure SQL and its required schema, then set the DB_* and JWT_SECRET application settings."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": false,
+        "hasDockerfile": false,
+        "f1Viable": true
+      }
+    },
+    {
+      "name": "EduPulse frontend",
+      "path": "frontend community/project",
+      "stack": {
+        "language": "JavaScript",
+        "framework": "React / Vite",
+        "version": "React 19.1.0; Vite 6.3.2"
+      },
+      "readiness": {
+        "status": "ready",
+        "fixes": []
+      },
+      "verdicts": {
+        "build": "WARN",
+        "completeness": "WARN",
+        "deployability": "WARN"
+      },
+      "findings": [
+        {
+          "category": "build",
+          "verdict": "WARN",
+          "summary": "The most recent production build succeeded but emitted a 1.02 MB minified JavaScript chunk warning.",
+          "fix": "Consider route-level code splitting and reducing initial bundle size."
+        },
+        {
+          "category": "completeness",
+          "verdict": "WARN",
+          "summary": "The frontend README still describes the old mock API and password login.",
+          "fix": "Update the README to document the live API and actual configuration."
+        },
+        {
+          "category": "deployability",
+          "verdict": "WARN",
+          "summary": "The production API URL is not set by the source; the '/api' fallback needs same-origin routing.",
+          "fix": "Set VITE_API_URL to the deployed API origin or configure a production /api reverse proxy."
+        }
+      ],
+      "buildRequirements": {
+        "hasNativeModules": false,
+        "hasDockerfile": false,
+        "f1Viable": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "id": "W-API-URL",
+      "component": "EduPulse frontend",
+      "axis": "deployability",
+      "summary": "Production API origin is not configured.",
+      "detail": "The API client falls back to '/api', while the localhost:4000 proxy exists only in Vite's development server.",
+      "fix": "Set VITE_API_URL to the deployed API origin or configure a production /api reverse proxy.",
+      "fixPhase": "scaffold"
+    },
+    {
+      "id": "W-DB-SCHEMA",
+      "component": "EduPulse API",
+      "axis": "deployability",
+      "summary": "The SQL Server schema is not provisioned by this repository.",
+      "detail": "The API queries dbo tables and expects an existing school database; no SQL schema or migration files were found. The local demo database is not an Azure database.",
+      "fix": "Provision Azure SQL, apply the required dbo schema, and configure DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, encryption, and JWT_SECRET before deploying.",
+      "fixPhase": "scaffold"
+    },
+    {
+      "id": "W-DEMO-ACCOUNTS",
+      "component": "EduPulse API",
+      "axis": "deployability",
+      "summary": "Local demo users must not be used in production.",
+      "detail": "The connected development database contains shared demo-role credentials and sample records.",
+      "fix": "Do not migrate the demo users to production; create unique production accounts with strong initial passwords.",
+      "fixPhase": "deploy-gate"
+    },
+    {
+      "id": "W-FRONTEND-README",
+      "component": "EduPulse frontend",
+      "axis": "completeness",
+      "summary": "Frontend documentation describes the removed mock backend.",
+      "detail": "The README says Axios uses localStorage mock data and advertises a demo password, while the current frontend uses the real API.",
+      "fix": "Update the README with the backend startup and production API configuration instructions.",
+      "fixPhase": "post-deploy"
+    },
+    {
+      "id": "W-BUNDLE-SIZE",
+      "component": "EduPulse frontend",
+      "axis": "build",
+      "summary": "The last recorded production build emitted a large-chunk advisory.",
+      "detail": "The minified JavaScript bundle was about 1.02 MB, above Vite's 500 kB advisory threshold; this is not a deployment blocker.",
+      "fix": "Consider code-splitting route components and reducing the initial bundle.",
+      "fixPhase": "post-deploy"
+    },
+    {
+      "id": "W-AZURE-CONTEXT",
+      "component": "Repository",
+      "axis": "deployability",
+      "summary": "Azure account and deployment target could not be validated.",
+      "detail": "Azure CLI is not installed and no Azure infrastructure files or target subscription are present.",
+      "fix": "Install/sign in to Azure CLI and select a subscription, resource group, and region during deployment planning.",
+      "fixPhase": "deploy-gate"
+    }
+  ],
+  "detectedStack": "React 19/Vite 6 frontend, Node.js 20+/Express 5 API, SQL Server dependency, and an incomplete root Node.js package.",
+  "fastTrackEligible": false,
+  "overallHealth": "blocked",
+  "buildRequirements": {
+    "hasNativeModules": true,
+    "hasDockerfile": false,
+    "f1Viable": false,
+    "f1BlockReason": "native bcrypt addon is present in the root package lockfile; the actual API uses bcryptjs"
+  },
+  "healthEndpoint": "/api/health",
+  "entryPoint": "community project/src/server.js",
+  "postDeployRecommendations": [
+    {
+      "title": "Configure the production API URL",
+      "reason": "The static frontend needs a deployed API origin or same-origin reverse proxy.",
+      "effort": "low",
+      "services": [
+        "Azure Static Web Apps",
+        "Azure App Service"
+      ]
+    },
+    {
+      "title": "Provision Azure SQL schema",
+      "reason": "The API requires dbo tables that are not created by this repository.",
+      "effort": "medium",
+      "services": [
+        "Azure SQL"
+      ]
+    },
+    {
+      "title": "Replace local demo accounts",
+      "reason": "Shared demo credentials and sample records must not be promoted to production.",
+      "effort": "low",
+      "services": [
+        "Azure SQL"
+      ]
+    },
+    {
+      "title": "Refresh frontend deployment documentation",
+      "reason": "Current instructions still describe the removed mock login backend.",
+      "effort": "low",
+      "services": []
+    },
+    {
+      "title": "Reduce frontend initial bundle",
+      "reason": "The last production build reported a JavaScript chunk above 1 MB.",
+      "effort": "medium",
+      "services": [
+        "Azure Static Web Apps"
+      ]
+    }
+  ],
+  "initCommands": []
+}

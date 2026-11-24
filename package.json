@@ -1,0 +1,16 @@
+{
+  "name": "edupulse",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "community project",
+    "frontend community/project"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=edupulse-frontend",
+    "test:api": "npm test --workspace=edupulse-server"
+  }
+}

@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-canvas: #F8FAFC;
+  --bg-card: rgba(255, 255, 255, 0.96);
+  --bg-card-hover: #F8FBFF;
+  --border-color: #E2E8F0;
+  --border-color-hover: #93C5FD;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --bg-sidebar: #FFFFFF;
+  --bg-header: rgba(255, 255, 255, 0.94);
+  --input-bg: #FFFFFF;
+  --ai-glow: rgba(132, 204, 22, 0.1);
+  --surface-soft: rgba(37, 99, 235, 0.06);
+  --surface-grid: rgba(37, 99, 235, 0.04);
+  --shadow-ai: rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="obsidian"] {
+  --bg-canvas: #F8FAFC;
+  --bg-card: rgba(255, 255, 255, 0.96);
+  --bg-card-hover: #F8FBFF;
+  --border-color: #E2E8F0;
+  --border-color-hover: #93C5FD;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --bg-sidebar: #FFFFFF;
+  --bg-header: rgba(255, 255, 255, 0.94);
+  --input-bg: #FFFFFF;
+  --ai-glow: rgba(132, 204, 22, 0.1);
+  --surface-soft: rgba(37, 99, 235, 0.06);
+  --surface-grid: rgba(37, 99, 235, 0.04);
+  --shadow-ai: rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="sapphire"] {
+  /* AI Sapphire — cool aqua intelligence */
+  --bg-canvas: #071a24;
+  --bg-card: rgba(16, 50, 77, 0.84);
+  --bg-card-hover: rgba(27, 75, 111, 0.96);
+  --border-color: rgba(152, 222, 250, 0.22);
+  --border-color-hover: rgba(45, 212, 191, 0.76);
+  --text-main: #eefbff;
+  --text-muted: #a9d6e7;
+  --bg-sidebar: #071928;
+  --bg-header: rgba(8, 30, 48, 0.82);
+  --input-bg: rgba(14, 56, 79, 0.78);
+  --ai-glow: rgba(45, 212, 191, 0.28);
+  --surface-soft: rgba(82, 237, 220, 0.1);
+  --surface-grid: rgba(119, 238, 255, 0.1);
+  --shadow-ai: rgba(45, 212, 191, 0.22);
+}
+
+[data-theme="indigo"] {
+  /* Soft AI Indigo — friendly pastel intelligence */
+  --bg-canvas: #eef4ff;
+  --bg-card: rgba(255,255,255,0.92);
+  --bg-card-hover: rgba(235, 242, 255, 0.98);
+  --border-color: rgba(129, 140, 248, 0.22);
+  --border-color-hover: rgba(99, 102, 241, 0.8);
+  --text-main: #17213c;
+  --text-muted: #65728c;
+  --bg-sidebar: #eef4ff;
+  --bg-header: rgba(239, 245, 255, 0.84);
+  --input-bg: rgba(255,255,255,0.9);
+  --ai-glow: rgba(129, 140, 248, 0.24);
+  --surface-soft: rgba(129, 140, 248, 0.08);
+  --surface-grid: rgba(99, 102, 241, 0.08);
+  --shadow-ai: rgba(129, 140, 248, 0.2);
+}
+
+@layer base {
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 72% 10%, rgba(37, 99, 235, 0.06), transparent 20%),
+      radial-gradient(circle at 80% 88%, rgba(132, 204, 22, 0.08), transparent 22%),
+      var(--bg-canvas);
+    color: var(--text-main);
+    @apply font-sans antialiased selection:bg-blue-soft selection:text-blue;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -120px;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(37, 99, 235, 0.07) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1), transparent 100%);
+    transform: rotate(2deg);
+    opacity: 0.9;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    @apply rounded-2xl p-5 shadow-xl backdrop-blur-md transition-all duration-200 min-w-0;
+  }
+  .card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-color-hover);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+  }
+  .card-interactive {
+    @apply card cursor-pointer hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .eyebrow {
+    @apply text-cyan text-[10px] font-bold tracking-[0.12em] uppercase;
+  }
+  .eyebrow::before {
+    content: '/';
+    color: #65A30D;
+    display: inline-block;
+    margin-right: 0.4rem;
+    font-weight: 900;
+    font-size: 1.35em;
+    transform: rotate(8deg);
+  }
+  .eyebrow-no-slash::before {
+    content: none;
+    display: none;
+  }
+  .btn-touch {
+    @apply min-h-[44px] min-w-[44px] inline-flex items-center justify-center font-medium transition-all active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply btn-touch gap-2 px-4 rounded-xl bg-gradient-to-r from-blue to-indigo hover:from-blue-dark hover:to-indigo-dark text-white text-xs font-semibold shadow-md shadow-blue/20;
+  }
+  .btn-outline {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    @apply btn-touch gap-2 px-4 rounded-xl text-xs font-semibold hover:border-blue/50 transition-all;
+  }
+  .btn-danger {
+    @apply btn-touch gap-2 px-4 rounded-xl bg-red hover:bg-red-dark text-white text-xs font-semibold shadow-md shadow-red/20;
+  }
+  .btn-ghost {
+    color: var(--text-muted);
+    @apply btn-touch gap-2 px-3 rounded-xl hover:bg-white/10 text-xs font-medium transition-colors;
+  }
+  .input {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    @apply w-full h-[44px] rounded-xl px-3.5 text-xs outline-none transition-all focus:border-blue focus:ring-4 focus:ring-blue/20 placeholder:text-slate-500;
+  }
+  .glass-panel {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    @apply backdrop-blur-xl shadow-float rounded-2xl;
+  }
+  .glass-ai-card {
+    @apply relative overflow-hidden rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-lime-50 backdrop-blur-md shadow-lg transition-all duration-300 hover:border-blue-300;
+  }
+  .tag {
+    @apply text-[10px] rounded-lg px-2.5 py-1 font-semibold whitespace-nowrap inline-flex items-center gap-1;
+  }
+  .skeleton {
+    @apply bg-slate-200/80 animate-pulse-soft rounded-lg;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
